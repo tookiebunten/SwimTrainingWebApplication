@@ -12,7 +12,7 @@ namespace BackEnd.Models
             : base(options)
         {
         }
-            public DbSet<Coaches> Coaches { get; set; }
+            public DbSet<Coach> Coaches { get; set; }
     }
     
 }

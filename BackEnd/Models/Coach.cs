@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models
 {
-    public class Coaches
+    public class Coach
     {
         public int Id { get; set; }
 
