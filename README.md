@@ -20,8 +20,8 @@ The purpose of this project is to allow me to learn GitHub and ASP.NET while bui
 |Id|interger|5|00001|
 |FirstName|varchar|50|John|
 |LastName|varchar|50|Smith|
-|UserName|varchar|100|John Smith|
-|CoachesDetails|varchar|1000|Level 2 Swim Coach|
+|UserName|varchar|200|John Smith|
+|CoachesDetails|varchar|2000|Level 2 Swim Coach|
 
 **Table name - Swimmers**
 |Field Name|Data Type|Field Size For Display|Example|
