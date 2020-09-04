@@ -6,6 +6,8 @@ An app to track both in pool and land training sessions for swimmers as well as 
 
 ## Purpose
 
+The purpose of this project is to allow me to learn GitHub and ASP.NET while building an application for a subject that I'm passionate about. 
+
 ## Application Architecture
 
 ## Data Schema
