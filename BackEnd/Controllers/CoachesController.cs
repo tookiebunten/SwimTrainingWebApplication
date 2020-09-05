@@ -29,16 +29,17 @@ namespace BackEnd.Controllers
 
         // GET: api/Coaches/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Coach>> GetCoach(int id)
+        public async Task<ActionResult<EventsDTO.CoachResponse>> GetSpeaker(int id)
         {
-            var coach = await _context.Coaches.FindAsync(id);
-
+            var coach = await _context.Coaches.AsNoTracking()
+                                            .Include(s => s.SessionCoaches)
+                                                .ThenInclude(ss => ss.Session)
+                                            .SingleOrDefaultAsync(s => s.Id == id);
             if (coach == null)
             {
                 return NotFound();
             }
-
-            return coach;
+            return coach.MapCoachResponse();
         }
 
         // PUT: api/Coaches/5

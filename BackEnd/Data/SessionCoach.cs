@@ -10,7 +10,7 @@ namespace BackEnd.Data
 
         public int SessionId { get; set; }
 
-        public Session Sessions { get; set; }
+        public Session Session { get; set; }
 
         public int CoachId { get; set; }
 

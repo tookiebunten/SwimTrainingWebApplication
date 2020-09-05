@@ -10,6 +10,6 @@ namespace BackEnd.Data
 
         public virtual ICollection<SessionSwimmer> SessionSwimmers { get; set; }
 
-        public Squad Squad { get; set; }
+        public Squad Squads { get; set; }
     }
 }
