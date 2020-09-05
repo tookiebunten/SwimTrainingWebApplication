@@ -36,7 +36,7 @@ The purpose of this project is to allow me to learn GitHub and ASP.NET while bui
 |Field Name|Data Type|Field Size For Display|Example|
 |----------|---------|----------------------|-------|
 |Id|interger|5|00001|
-|Name|varchar|50|Development|
+|Name|varchar|200|Development|
 |EventId|integer|5|00001|
 
 **Table name - Event**
