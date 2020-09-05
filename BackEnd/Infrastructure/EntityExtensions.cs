@@ -16,7 +16,7 @@ namespace BackEnd.Data
                 FirstName = coach.FirstName,
                 LastName = coach.LastName,
                 CoachDetails = coach.CoachDetails,
-                Sessions = coach.SessionsCoach?
+                Sessions = coach.SessionCoaches?
                     .Select(ss =>
                         new EventsDTO.Session
                         {
