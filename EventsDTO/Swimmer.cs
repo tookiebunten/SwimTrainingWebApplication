@@ -5,9 +5,7 @@ using System.Text;
 
 namespace EventsDTO
 {
-    namespace EventsDTO
-    {
-        public class Swimmers
+        public class Swimmer
         {
             public int Id { get; set; }
             //Swimmer's first name
@@ -26,4 +24,3 @@ namespace EventsDTO
             public string EmailAddress { get; set; }
         }
     }
-}

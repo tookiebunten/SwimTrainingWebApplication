@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EventsDTO
 {
-    class Sessions
+    public class Session
     {
         public int Id { get; set; }
         //sessions needs a title - like Training or Competition 

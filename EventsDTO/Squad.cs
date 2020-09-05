@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EventsDTO
 {
-    class Squad
+    public class Squad
     {
 
         public int Id { get; set; }
