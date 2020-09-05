@@ -51,8 +51,8 @@ The purpose of this project is to allow me to learn GitHub and ASP.NET while bui
 |Id|interger|5|00001|
 |EventId|integer|5|00001|
 |SquadId|interger|5|00001|
-|Title|varchar|50|Training|
-|Description|varchar|2000|Land training at the leisure centre|
+|Title|varchar|200|Training|
+|Description|varchar|4000|Land training at the leisure centre|
 |StartTime|date|14|dd/mm/yy HH24:MI|
 |EndTime|date|14|dd/mm/yy HH24:MI|
 
