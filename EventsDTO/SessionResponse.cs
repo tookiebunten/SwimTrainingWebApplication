@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EventsDTO
 {
-    class SessionResponse : Session
+    public class SessionResponse : Session
     {
         public Squad Squad { get; set; }
 

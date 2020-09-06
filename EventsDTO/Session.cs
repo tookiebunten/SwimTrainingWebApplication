@@ -24,6 +24,7 @@ namespace EventsDTO
         public TimeSpan Duration => EndTime?.Subtract(StartTime ?? EndTime ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
 
         public int? SquadId { get; set; }
+
     }
         
 }
