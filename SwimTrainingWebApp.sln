@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.csproj", "{0C2CFA6F-FDEB-472D-A898-F84C28F6F1D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsDTO", "EventsDTO\EventsDTO.csproj", "{398F759C-85A3-4100-B438-07E56ECA2969}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsDTO", "EventsDTO\EventsDTO.csproj", "{398F759C-85A3-4100-B438-07E56ECA2969}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{9F894359-95DC-41FE-9691-EEF0B625BA03}"
+	ProjectSection(ProjectDependencies) = postProject
+		{398F759C-85A3-4100-B438-07E56ECA2969} = {398F759C-85A3-4100-B438-07E56ECA2969}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{398F759C-85A3-4100-B438-07E56ECA2969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{398F759C-85A3-4100-B438-07E56ECA2969}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{398F759C-85A3-4100-B438-07E56ECA2969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

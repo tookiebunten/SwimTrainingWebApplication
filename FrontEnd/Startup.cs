@@ -1,14 +1,16 @@
-using BackEnd.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FrontEnd.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using System.Threading.Tasks;
 
-namespace BackEnd
+namespace FrontEnd
 {
     public class Startup
     {
@@ -20,24 +22,15 @@ namespace BackEnd
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        [System.Obsolete]
         public void ConfigureServices(IServiceCollection services)
-
         {
-            //Adding Sqlite connection
-            services.AddDbContext<ApplicationDbContext>(options =>
+
+            services.AddHttpClient<IApiClient, ApiClient>(client =>
             {
-                options.UseSqlite("Data Source =events.db");
+                client.BaseAddress = new Uri(Configuration["serviceUrl"]);
             });
 
-            services.AddControllers();
-
-            //Adding Swashbuckler services
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Events Planner API", Version = "v1" });
-                /*options.DescribeAllEnumsAsStrings();*/
-            });
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,12 +40,15 @@ namespace BackEnd
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
-
-            app.UseSwaggerUI(options =>
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Events Planner API v1")
-            );
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -60,12 +56,7 @@ namespace BackEnd
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", context => {
-                    context.Response.Redirect("/swagger/");
-                    return Task.CompletedTask;
-                });
-
-                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
