@@ -10,6 +10,7 @@ namespace BackEnd.Data
 {
     public static class EntityExtensions
     {
+        //For pulling coach details
         public static EventsDTO.CoachResponse MapCoachResponse(this Coach coach) =>
             new EventsDTO.CoachResponse
             {
@@ -26,6 +27,7 @@ namespace BackEnd.Data
                         })
                     .ToList()
             };
+        //for pulling swimmwers details
         public static EventsDTO.SwimmerResponse MapSwimmerResponse(this Swimmer swimmer) =>
             new EventsDTO.SwimmerResponse
             {
@@ -44,7 +46,7 @@ namespace BackEnd.Data
                         })
                     .ToList()
             };
-
+        //for pulling availible sessions
         public static EventsDTO.SessionResponse MapSessionResponse(this Session session) =>
             new EventsDTO.SessionResponse
             {
