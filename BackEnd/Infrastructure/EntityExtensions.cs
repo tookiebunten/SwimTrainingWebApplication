@@ -15,8 +15,9 @@ namespace BackEnd.Data
             new EventsDTO.CoachResponse
             {
                 Id = coach.Id,
-                FirstName = coach.FirstName,
-                LastName = coach.LastName,
+                CoachName = coach.CoachName,
+                /*FirstName = coach.FirstName,
+                LastName = coach.LastName,*/
                 CoachDetails = coach.CoachDetails,
                 Sessions = coach.SessionCoaches?
                     .Select(ss =>
@@ -58,8 +59,10 @@ namespace BackEnd.Data
                                   .Select(ss => new EventsDTO.Coach
                                   {
                                       Id = ss.CoachId,
+                                      CoachName = ss.Coaches.CoachName,
+                                      /*
                                       FirstName = ss.Coaches.FirstName,
-                                      LastName = ss.Coaches.LastName
+                                      LastName = ss.Coaches.LastName*/
                                   })
                                    .ToList(),
                 SquadId = session.SquadId,

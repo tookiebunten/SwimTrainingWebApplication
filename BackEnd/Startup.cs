@@ -20,6 +20,7 @@ namespace BackEnd
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [System.Obsolete]
         public void ConfigureServices(IServiceCollection services)
 
         {
@@ -33,9 +34,10 @@ namespace BackEnd
 
             //Adding Swashbuckler services
             services.AddSwaggerGen(options =>
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Conference Planner API", Version = "v1" }
-                )
-               );
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Conference Planner API", Version = "v1" });
+                /*options.DescribeAllEnumsAsStrings();*/
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
