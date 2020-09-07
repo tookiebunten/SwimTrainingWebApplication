@@ -7,7 +7,7 @@ using EventsDTO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BackEnd
+namespace BackEnd.Data
 {
     public class DevIntersectionLoader : DataLoader
     {
@@ -15,44 +15,44 @@ namespace BackEnd
         {
             var reader = new JsonTextReader(new StreamReader(fileStream));
 
-            var speakerNames = new Dictionary<string, EventsDTO.Coach>();
-            var squad = new Dictionary<string, EventsDTO.Squad>();
+            var coachesName = new Dictionary<string, Coach>();
+            var squad = new Dictionary<string, Squad>();
 
             JArray doc = await JArray.LoadAsync(reader);
 
             foreach (JObject item in doc)
             {
-                var theseCoaches = new List<EventsDTO.Coach>();
+                var theseCoaches = new List<Coach>();
                 foreach (var thisCoachName in item["coachNames"])
                 {
-                    if (!coachNames.ContainsKey(thisCoachName.Value<string>()))
+                    if (!coachesName.ContainsKey(thisCoachName.Value<string>()))
                     {
-                        var thisCoach = new EventsDTO.Coach { Name = thisCoachName.Value<string>() };
+                        var thisCoach = new Coach { CoachName = thisCoachName.Value<string>() };
                         db.Coaches.Add(thisCoach);
-                        coachNames.Add(thisCoachName.Value<string>(), thisCoach);
+                        coachesName.Add(thisCoachName.Value<string>(), thisCoach);
                         Console.WriteLine(thisCoachName.Value<string>());
                     }
-                    theseCoaches.Add(coachNames[thisCoachName.Value<string>()]);
+                    theseCoaches.Add(coachesName[thisCoachName.Value<string>()]);
                 }
 
-                var theseSquads = new List<EventsDTO.Squad>();
-                foreach (var thisTrackName in item["trackNames"])
+                var theseSquads = new List<Squad>();
+                foreach (var thisSquadName in item["squadNames"])
                 {
-                    if (!squads.ContainsKey(thisTrackName.Value<string>()))
+                    if (!squad.ContainsKey(thisSquadName.Value<string>()))
                     {
-                        var thisSquad = new EventsDTO.Squad { Name = thisSquadName.Value<string>() };
+                        var thisSquad = new Squad { Name = thisSquadName.Value<string>() };
                         db.Squads.Add(thisSquad);
-                        squads.Add(thisTrackName.Value<string>(), thisSquad);
+                        squad.Add(thisSquadName.Value<string>(), thisSquad);
                     }
-                    theseSquads.Add(squads[thisSquadName.Value<string>()]);
+                    theseSquads.Add(squad[thisSquadName.Value<string>()]);
                 }
 
-                var session = new EventsDTO.Session
+                var session = new Session
                 {
                     SessionTitle = item["title"].Value<string>(),
                     StartTime = item["startTime"].Value<DateTime>(),
                     EndTime = item["endTime"].Value<DateTime>(),
-                    Squad = theseSquads[0],
+                    Squads = theseSquads[0],
                     SessionDescription = item["SessionDescription"].Value<string>()
                 };
 

@@ -6,7 +6,8 @@ using BackEnd.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BackEnd
+namespace BackEnd.Data
+
 {
     public class SessionizeLoader : DataLoader
     {
@@ -14,8 +15,8 @@ namespace BackEnd
         {
             // var blah = new RootObject().rooms[0].sessions[0].speakers[0].name;
 
-            var addedSpeakers = new Dictionary<string, Speaker>();
-            var addedTracks = new Dictionary<string, Track>();
+            var addedCoaches = new Dictionary<string, Coach>();
+            var addedSquads = new Dictionary<string, Squad>();
 
             var array = await JToken.LoadAsync(new JsonTextReader(new StreamReader(fileStream)));
 
@@ -23,43 +24,43 @@ namespace BackEnd
 
             foreach (var date in root)
             {
-                foreach (var room in date.rooms)
+                foreach (var room in date.Rooms)
                 {
-                    if (!addedTracks.ContainsKey(room.name))
+                    if (!addedSquads.ContainsKey(room.Name))
                     {
-                        var thisTrack = new Track { Name = room.name };
-                        db.Tracks.Add(thisTrack);
-                        addedTracks.Add(thisTrack.Name, thisTrack);
+                        var thisSquad = new Squad { Name = room.Name };
+                        db.Squads.Add(thisSquad);
+                        addedSquads.Add(thisSquad.Name, thisSquad);
                     }
 
-                    foreach (var thisSession in room.sessions)
+                    foreach (var thisSession in room.Sessions)
                     {
-                        foreach (var speaker in thisSession.speakers)
+                        foreach (var coach in thisSession.Coach)
                         {
-                            if (!addedSpeakers.ContainsKey(speaker.name))
+                            if (!addedCoaches.ContainsKey(coach.Name))
                             {
-                                var thisSpeaker = new Speaker { Name = speaker.name };
-                                db.Speakers.Add(thisSpeaker);
-                                addedSpeakers.Add(thisSpeaker.Name, thisSpeaker);
+                                var thisCoach = new Coach { CoachName = coach.Name };
+                                db.Coaches.Add(thisCoach);
+                                addedCoaches.Add(thisCoach.CoachName, thisCoach);
                             }
                         }
 
                         var session = new Session
                         {
-                            Title = thisSession.title,
-                            StartTime = thisSession.startsAt,
-                            EndTime = thisSession.endsAt,
-                            Track = addedTracks[room.name],
-                            Abstract = thisSession.description
+                            SessionTitle = thisSession.Title,
+                            StartTime = thisSession.StartsAt,
+                            EndTime = thisSession.EndsAt,
+                            Squads = addedSquads[room.Name],
+                            SessionDescription = thisSession.Description
                         };
 
-                        session.SessionSpeakers = new List<SessionSpeaker>();
-                        foreach (var sp in thisSession.speakers)
+                        session.SessionCoaches = new List<SessionCoach>();
+                        foreach (var sp in thisSession.Coach)
                         {
-                            session.SessionSpeakers.Add(new SessionSpeaker
+                            session.SessionCoaches.Add(new SessionCoach
                             {
                                 Session = session,
-                                Speaker = addedSpeakers[sp.name]
+                                Coaches = addedCoaches[sp.Name]
                             });
                         }
 
@@ -71,52 +72,52 @@ namespace BackEnd
 
         private class RootObject
         {
-            public DateTime date { get; set; }
-            public List<Room> rooms { get; set; }
-            public List<TimeSlot> timeSlots { get; set; }
+            public DateTime Date { get; set; }
+            public List<Room> Rooms { get; set; }
+            public List<TimeSlot> TimeSlots { get; set; }
         }
 
         private class ImportSpeaker
         {
-            public string id { get; set; }
-            public string name { get; set; }
+            public string Id { get; set; }
+            public string Name { get; set; }
         }
 
         private class Category
         {
-            public int id { get; set; }
-            public string name { get; set; }
-            public List<object> categoryItems { get; set; }
-            public int sort { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public List<object> CategoryItems { get; set; }
+            public int Sort { get; set; }
         }
 
         private class ImportSession
         {
-            public int id { get; set; }
-            public string title { get; set; }
-            public string description { get; set; }
-            public DateTime startsAt { get; set; }
-            public DateTime endsAt { get; set; }
-            public bool isServiceSession { get; set; }
-            public bool isPlenumSession { get; set; }
-            public List<ImportSpeaker> speakers { get; set; }
-            public List<Category> categories { get; set; }
-            public int roomId { get; set; }
-            public string room { get; set; }
+            public int Id { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public DateTime StartsAt { get; set; }
+            public DateTime EndsAt { get; set; }
+            public bool IsServiceSession { get; set; }
+            public bool IsPlenumSession { get; set; }
+            public List<ImportSpeaker> Coach { get; set; }
+            public List<Category> Categories { get; set; }
+            public int RoomId { get; set; }
+            public string Room { get; set; }
         }
 
         private class Room
         {
-            public int id { get; set; }
-            public string name { get; set; }
-            public List<ImportSession> sessions { get; set; }
-            public bool hasOnlyPlenumSessions { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public List<ImportSession> Sessions { get; set; }
+            public bool HasOnlyPlenumSessions { get; set; }
         }
 
         private class TimeSlot
         {
-            public string slotStart { get; set; }
-            public List<Room> rooms { get; set; }
+            public string SlotStart { get; set; }
+            public List<Room> Rooms { get; set; }
         }
     }
 }
