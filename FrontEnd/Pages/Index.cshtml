@@ -6,7 +6,7 @@
     <div class="agenda">
         <h1>My Conference @System.DateTime.Now.Year</h1>
 
-        @foreach (var timeSlot in Model.Sessions)
+        @foreach (var timeSlot in Model.Session)
         {
             <h4>@timeSlot.Key?.ToString("HH:mm")</h4>
             <ul>
