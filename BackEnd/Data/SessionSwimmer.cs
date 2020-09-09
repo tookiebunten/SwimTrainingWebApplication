@@ -14,5 +14,6 @@ namespace BackEnd.Data
         public int SwimmerId { get; set; }
 
         public Swimmer Swimmer { get; set; }
+
     }
 }

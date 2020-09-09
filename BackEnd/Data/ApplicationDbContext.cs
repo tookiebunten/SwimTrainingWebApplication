@@ -27,7 +27,7 @@ namespace BackEnd.Data
 
         public DbSet<Session> Sessions { get; set; }
 
-        public DbSet<Squad> Squads { get; set; }
+        public DbSet<Track> Tracks { get; set; }
 
         public DbSet<Coach> Coaches { get; set; }
 

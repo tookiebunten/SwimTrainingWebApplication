@@ -22,14 +22,20 @@ namespace BackEnd.Controllers
 
         // GET: api/Coaches
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Coach>>> GetCoaches()
+        public async Task<ActionResult<List<EventsDTO.CoachResponse>>> GetSpeakers()
         {
-            return await _context.Coaches.ToListAsync();
+
+            var coaches = await _context.Coaches.AsNoTracking()
+                            .Include(s => s.SessionCoaches)
+                                .ThenInclude(ss => ss.Session)
+                                .Select(s => s.MapCoachResponse())
+                            .ToListAsync();
+            return coaches;
         }
 
         // GET: api/Coaches/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EventsDTO.CoachResponse>> GetSpeaker(int id)
+        public async Task<ActionResult<EventsDTO.CoachResponse>> GetCoach(int id)
         {
             var coach = await _context.Coaches.AsNoTracking()
                                             .Include(s => s.SessionCoaches)
@@ -41,6 +47,6 @@ namespace BackEnd.Controllers
             }
             return coach.MapCoachResponse();
         }
-        
     }
 }
+

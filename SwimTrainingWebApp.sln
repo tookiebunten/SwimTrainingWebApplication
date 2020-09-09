@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsDTO", "EventsDTO\EventsDTO.csproj", "{398F759C-85A3-4100-B438-07E56ECA2969}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{9F894359-95DC-41FE-9691-EEF0B625BA03}"
-	ProjectSection(ProjectDependencies) = postProject
-		{398F759C-85A3-4100-B438-07E56ECA2969} = {398F759C-85A3-4100-B438-07E56ECA2969}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,10 +21,6 @@ Global
 		{398F759C-85A3-4100-B438-07E56ECA2969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{398F759C-85A3-4100-B438-07E56ECA2969}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{398F759C-85A3-4100-B438-07E56ECA2969}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F894359-95DC-41FE-9691-EEF0B625BA03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

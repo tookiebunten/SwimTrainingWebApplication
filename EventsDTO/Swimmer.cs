@@ -5,22 +5,24 @@ using System.Text;
 
 namespace EventsDTO
 {
-        public class Swimmer
-        {
-            public int Id { get; set; }
-            //Swimmer's first name
-            [Required]
-            [StringLength(50)]
-            public string FirstName { get; set; }
-            //Swimmer's last name
-            [Required]
-            [StringLength(50)]
-            public string LastName { get; set; }
-            //username or full name of Swimmer
-            [StringLength(200)]
-            public string UserName { get; set; }
-            //Swimmer's email address
-            [StringLength(100)]
-            public string EmailAddress { get; set; }
-        }
+    public class Swimmer
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public virtual string FirstName { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public virtual string LastName { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string UserName { get; set; }
+
+        [StringLength(256)]
+        public virtual string EmailAddress { get; set; }
+
     }
+}

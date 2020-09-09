@@ -7,14 +7,13 @@ namespace BackEnd.Data
 {
     public class SessionCoach
     {
-
         public int SessionId { get; set; }
 
         public Session Session { get; set; }
 
         public int CoachId { get; set; }
 
-        public Coach Coaches { get; set; }
+        public Coach Coach { get; set; }
 
     }
 }

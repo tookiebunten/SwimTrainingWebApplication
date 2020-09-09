@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Data
 {
-    public class Swimmer : EventsDTO.Swimmer
+    public class Track : EventsDTO.Track
     {
-        public virtual ICollection<SessionSwimmer> SessionSwimmers { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
     }
 }
-

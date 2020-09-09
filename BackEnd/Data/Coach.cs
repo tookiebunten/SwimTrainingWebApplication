@@ -1,11 +1,11 @@
-﻿using System;
+﻿using BackEnd.Data;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace BackEnd.Data
+public class Coach : EventsDTO.Coach
 {
-    public class Coach : EventsDTO.Coach
-    {
-        public virtual ICollection<SessionCoach> SessionCoaches { get; set; } = new List<SessionCoach>();
-
-    }
+    public virtual ICollection<SessionCoach> SessionCoaches { get; set; } = new List<SessionCoach>();
 }

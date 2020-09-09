@@ -20,24 +20,22 @@ namespace BackEnd
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        [System.Obsolete]
         public void ConfigureServices(IServiceCollection services)
-
         {
-            //Adding Sqlite connection
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlite("Data Source =events.db");
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
             });
 
             services.AddControllers();
 
-            //Adding Swashbuckler services
             services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Events Planner API", Version = "v1" });
-                /*options.DescribeAllEnumsAsStrings();*/
-            });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swim Training Planner API", Version = "v1" })
+            );
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,8 +48,10 @@ namespace BackEnd
 
             app.UseHttpsRedirection();
 
+            app.UseSwagger();
+
             app.UseSwaggerUI(options =>
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Events Planner API v1")
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swim Training Planner API v1")
             );
 
             app.UseRouting();
@@ -64,7 +64,6 @@ namespace BackEnd
                     context.Response.Redirect("/swagger/");
                     return Task.CompletedTask;
                 });
-
                 endpoints.MapControllers();
             });
         }
