@@ -4,6 +4,10 @@
 
 An app to track both in pool and land training sessions for swimmers as well as competitions attended. I'll be attempting to build API back-end application, a common library for shared data transfer objects using .NET Standard and a web front-end application.
 
+1. I want to be able to 'book' into a training session or competition to track attendance.
+1. Show all available training sessions and competitions
+1. Be able to track and show training/competion hours logged
+
 ## Purpose
 
 The purpose of this project is to allow me to learn GitHub and ASP.NET while building an application for a subject that I'm passionate about. 
