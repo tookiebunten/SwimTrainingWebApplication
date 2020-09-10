@@ -6,7 +6,7 @@ namespace EventsDTO
 {
     public class SessionResponse : Session
     {
-        public Squad Squad { get; set; }
+        public Track Track { get; set; }
 
         public List<Coach> Coaches { get; set; } = new List<Coach>();
     }
