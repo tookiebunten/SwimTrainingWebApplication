@@ -25,9 +25,9 @@ namespace BackEnd.Controllers
         public async Task<ActionResult<List<SessionResponse>>> Get()
         {
             var sessions = await _db.Sessions.AsNoTracking()
-                                             .Include(s => s.Squads)
+                                             .Include(s => s.Track)
                                              .Include(s => s.SessionCoaches)
-                                                .ThenInclude(ss => ss.Coaches)
+                                                .ThenInclude(ss => ss.Coach)
                                              .Select(m => m.MapSessionResponse())
                                              .ToListAsync();
 
@@ -38,9 +38,9 @@ namespace BackEnd.Controllers
         public async Task<ActionResult<SessionResponse>> Get(int id)
         {
             var session = await _db.Sessions.AsNoTracking()
-                                            .Include(s => s.Squads)
+                                            .Include(s => s.Track)
                                             .Include(s => s.SessionCoaches)
-                                                .ThenInclude(ss => ss.Coaches)
+                                                .ThenInclude(ss => ss.Coach)
                                             .SingleOrDefaultAsync(s => s.Id == id);
 
             if (session == null)
@@ -56,11 +56,11 @@ namespace BackEnd.Controllers
         {
             var session = new Data.Session
             {
-                SessionTitle = input.SessionTitle,
+                Title = input.Title,
                 StartTime = input.StartTime,
                 EndTime = input.EndTime,
-                SessionDescription = input.SessionDescription,
-                SquadId = input.SquadId
+                Abstract = input.Abstract,
+                TrackId = input.TrackId
             };
 
             _db.Sessions.Add(session);
@@ -82,11 +82,11 @@ namespace BackEnd.Controllers
             }
 
             session.Id = input.Id;
-            session.SessionTitle = input.SessionTitle;
-            session.SessionDescription = input.SessionDescription;
+            session.Title = input.Title;
+            session.Abstract = input.Abstract;
             session.StartTime = input.StartTime;
             session.EndTime = input.EndTime;
-            session.SquadId = input.SquadId;
+            session.TrackId = input.TrackId;
 
             await _db.SaveChangesAsync();
 
@@ -109,36 +109,5 @@ namespace BackEnd.Controllers
             return session.MapSessionResponse();
         }
 
-
-        [HttpPost("upload")]
-        [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Upload([FromForm] ConferenceFormat format, IFormFile file)
-        {
-            var loader = GetLoader(format);
-
-            using (var stream = file.OpenReadStream())
-            {
-                await loader.LoadDataAsync(stream, _db);
-            }
-
-            await _db.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        private static DataLoader GetLoader(ConferenceFormat format)
-        {
-            if (format == ConferenceFormat.Sessionize)
-            {
-                return new SessionizeLoader();
-            }
-            return new DevIntersectionLoader();
-        }
-
-        public enum ConferenceFormat
-        {
-            Sessionize,
-            DevIntersections
-        }
     }
 }
