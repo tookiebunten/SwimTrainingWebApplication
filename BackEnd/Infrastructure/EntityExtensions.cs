@@ -1,8 +1,4 @@
-﻿using BackEnd.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace BackEnd.Data
 {
@@ -15,27 +11,19 @@ namespace BackEnd.Data
                 Title = session.Title,
                 StartTime = session.StartTime,
                 EndTime = session.EndTime,
-                Tag = session.SessionTag?
-                              .Select(st => new EventsDTO.Tag
-                              {
-                                  Id = st.TagId,
-                                  Name = st.Tag.Name
-                              })
-                               .ToList(),
                 Coaches = session.SessionCoaches?
                                   .Select(ss => new EventsDTO.Coach
                                   {
                                       Id = ss.CoachId,
                                       Name = ss.Coach.Name
                                   })
-                                   .ToList(),
+                                  .ToList(),
                 TrackId = session.TrackId,
                 Track = new EventsDTO.Track
                 {
-                    TrackId = session?.TrackId ?? 0,
+                    Id = session?.TrackId ?? 0,
                     Name = session.Track?.Name
                 },
-                EventId = session.EventId,
                 Abstract = session.Abstract
             };
 
@@ -63,22 +51,15 @@ namespace BackEnd.Data
                 FirstName = swimmer.FirstName,
                 LastName = swimmer.LastName,
                 UserName = swimmer.UserName,
-                Sessions = swimmer.Sessions?
-                    .Select(s =>
+                EmailAddress = swimmer.EmailAddress,
+                Sessions = swimmer.SessionSwimmers?
+                    .Select(sa =>
                         new EventsDTO.Session
                         {
-                            Id = s.Id,
-                            Title = s.Title,
-                            StartTime = s.StartTime,
-                            EndTime = s.EndTime
-                        })
-                    .ToList(),
-                Event = Swimmer.Eventswimmers?
-                    .Select(ca =>
-                        new EventsDTO.Event
-                        {
-                            Id = ca.EventId,
-                            Name = ca.Event.Name
+                            Id = sa.SessionId,
+                            Title = sa.Session.Title,
+                            StartTime = sa.Session.StartTime,
+                            EndTime = sa.Session.EndTime
                         })
                     .ToList(),
             };
