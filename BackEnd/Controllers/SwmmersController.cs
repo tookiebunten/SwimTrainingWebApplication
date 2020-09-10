@@ -23,7 +23,7 @@ namespace BackEnd.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<SwimmerResponse>> Get(string username)
         {
-            var swimmer = await _context.Swimmers.Include(a => a.SessionsSwimmers)
+            var swimmer = await _context.Swimmers.Include(a => a.SessionSwimmers)
                                                 .ThenInclude(sa => sa.Session)
                                               .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -75,7 +75,7 @@ namespace BackEnd.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult<SwimmerResponse>> AddSession(string username, int sessionId)
         {
-            var swimmer = await _context.Swimmers.Include(a => a.SessionsSwimmers)
+            var swimmer = await _context.Swimmers.Include(a => a.SessionSwimmers)
                                                 .ThenInclude(sa => sa.Session)
                                               .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -91,7 +91,7 @@ namespace BackEnd.Controllers
                 return BadRequest();
             }
 
-            swimmer.SessionsSwimmers.Add(new SessionSwimmer
+            swimmer.SessionSwimmers.Add(new SessionSwimmer
             {
                 SwimmerId = swimmer.Id,
                 SessionId = sessionId
@@ -111,7 +111,7 @@ namespace BackEnd.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> RemoveSession(string username, int sessionId)
         {
-            var swimmer = await _context.Swimmers.Include(a => a.SessionsSwimmers)
+            var swimmer = await _context.Swimmers.Include(a => a.SessionSwimmers)
                                               .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (swimmer == null)
@@ -126,8 +126,8 @@ namespace BackEnd.Controllers
                 return BadRequest();
             }
 
-            var sessionSwimmer = swimmer.SessionsSwimmers.FirstOrDefault(sa => sa.SessionId == sessionId);
-            swimmer.SessionsSwimmers.Remove(sessionSwimmer);
+            var sessionSwimmer = swimmer.SessionSwimmers.FirstOrDefault(sa => sa.SessionId == sessionId);
+            swimmer.SessionSwimmers.Remove(sessionSwimmer);
 
             await _context.SaveChangesAsync();
 

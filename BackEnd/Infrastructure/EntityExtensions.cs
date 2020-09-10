@@ -15,7 +15,7 @@ namespace BackEnd.Data
                 Title = session.Title,
                 StartTime = session.StartTime,
                 EndTime = session.EndTime,
-                Tags = session.SessionTags?
+                Tag = session.SessionTag?
                               .Select(st => new EventsDTO.Tag
                               {
                                   Id = st.TagId,
